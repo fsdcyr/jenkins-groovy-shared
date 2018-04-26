@@ -33,7 +33,9 @@ def call(result, token, projectName) {
         }
     """
 
-    def http = new HTTPBuilder("https://oapi.dingtalk.com/robot/send?access_token=${token}")
+    def webhook = "https://oapi.dingtalk.com/robot/send?access_token=${token}"
+
+    def http = new HTTPBuilder(webhook)
 
     println payload
 
