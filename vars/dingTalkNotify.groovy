@@ -1,8 +1,3 @@
-@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.7' )
-import groovyx.net.http.HTTPBuilder
-import groovyx.net.http.Method
-import groovyx.net.http.ContentType
-
 
 def call(result, token, projectName) {
     println "咯咯咯咯"
@@ -35,31 +30,15 @@ def call(result, token, projectName) {
 
     def webhook = "https://oapi.dingtalk.com/robot/send?access_token=${token}"
 
-    def http = new HTTPBuilder(webhook)    
-
-    println http
-
-    println  "execute before"
-
-    http.request(Method.POST, ContentType.JSON) {
-        req ->
-            headers.'User-Agent' = "Mozilla/5.0 Firefox/3.0.4"  
-            headers.Accept = 'application/json'  
-            body = payload
-
-            println "req"
-
-            response.success = { resp, json ->
-                println resp.statusLine
-                println json
-            }
-
-            // handler for any failure status code:
-            response.failure = { resp ->
-                println "Unexpected error: ${resp}"
-            }
+    def post = new URL(webhook).openConnection()
+    post.setRequestMethod("POST")
+    post.setDoOutput(true)
+    post.setRequestProperty("Content-Type", "application/json")
+    post.getOutputStream().write(payload.getBytes("UTF-8"))
+    def postRC = post.getResponseCode()
+    println(postRC)
+    if(postRC.equals(200)) {
+        println(post.getInputStream().getText())
     }
-
-    println  "execute after"
 }
 
