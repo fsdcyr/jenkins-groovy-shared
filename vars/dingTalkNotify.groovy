@@ -39,6 +39,8 @@ def call(result, token, projectName) {
 
     println http
 
+    println  "execute before"
+
     http.request(Method.POST, ContentType.JSON) {
         req ->
             headers.'User-Agent' = "Mozilla/5.0 Firefox/3.0.4"  
@@ -54,5 +56,7 @@ def call(result, token, projectName) {
                 println "Unexpected error: ${resp}"
             }
     }
+
+    println  "execute after"
 }
 
