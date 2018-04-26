@@ -34,10 +34,14 @@ def call(result, token, projectName) {
     """
 
     def webhook = "https://oapi.dingtalk.com/robot/send?access_token=${token}"
+    try {
+        def http = new HTTPBuilder(webhook)
+    } catch(e) {
+        println e.getMessage()
+    }
+    
 
-    def http = new HTTPBuilder(webhook)
-
-    println payload
+    println http
 
     http.request(Method.POST, ContentType.JSON) {
         req ->
