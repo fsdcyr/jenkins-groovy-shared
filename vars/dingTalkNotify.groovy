@@ -49,7 +49,7 @@ def call(result, token, projectName) {
 
             // handler for any failure status code:
             response.failure = { resp ->
-                println "Unexpected error: ${resp.statusLine.statusCode} : ${resp.statusLine.reasonPhrase}"
+                println "Unexpected error: ${resp.statusLine}"
             }
     }
 }
