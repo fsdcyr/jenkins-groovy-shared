@@ -46,6 +46,9 @@ def call(result, token, projectName) {
             headers.'User-Agent' = "Mozilla/5.0 Firefox/3.0.4"  
             headers.Accept = 'application/json'  
             body = payload
+
+            println "req"
+
             response.success = { resp, json ->
                 println resp.statusLine
                 println json
