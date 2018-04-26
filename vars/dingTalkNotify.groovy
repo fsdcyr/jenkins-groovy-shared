@@ -21,18 +21,21 @@ def call(result, token, projectName) {
         return
     }
 
-    def payload = """
+    def payload = '''
         {
             "msgtype": "link", 
             "link": {
                 "text":"${text}", 
                 "title": "${title}", 
                 "picUrl": "http://or5sx3zbs.bkt.clouddn.com/jenkins/${picName}", 
-                "messageUrl": "https://open-doc.dingtalk.com/docs/doc.htm?spm=a219a.7629140.0.0.Rqyvqo&treeId=257&articleId=105735&docType=1"
+                "messageUrl": "http://127.0.0.1:8080"
             }
         }
-    """
+    '''
+
     def http = new HTTPBuilder("https://oapi.dingtalk.com/robot/send?access_token=${token}")
+
+    println payload
 
     http.request(Method.POST, ContentType.JSON) {
         req ->
