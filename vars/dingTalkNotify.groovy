@@ -5,6 +5,7 @@ import groovyx.net.http.ContentType
 
 
 def call(result, token, projectName) {
+    println result
     def title, text, picName
     if (result == 'SUCCESS') {
         title = "${projectName} 构建成功"
