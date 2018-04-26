@@ -21,7 +21,7 @@ def call(result, token, projectName) {
         return
     }
 
-    def payload = '''
+    def payload = """
         {
             "msgtype": "link", 
             "link": {
@@ -31,7 +31,7 @@ def call(result, token, projectName) {
                 "messageUrl": "http://127.0.0.1:8080"
             }
         }
-    '''
+    """
 
     def http = new HTTPBuilder("https://oapi.dingtalk.com/robot/send?access_token=${token}")
 
